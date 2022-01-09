@@ -1,17 +1,26 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-base_url = "https://testautomation-playground.herokuapp.com/"
-driver = webdriver.Chrome(executable_path="c:\chromedriver.exe")
-#driver.get("https://testautomation-playground.herokuapp.com/advanced.html")
-#driver.find_elements_by_id('input')
-#search_filed = driver.find_element('id','txt_rating')
-#search_filed.send_keys("mahnaz")
-#search_filed.send_keys(keys.RETURN)
-driver.get(f"{base_url}/forms.html")
-driver.find_element('id','check_python').click()
-check1 = driver.find_element('id','check_validate').text
-assert check1 =='PYTHON'
-text1 = "hello world"
-driver.find_element('id','notes').send_keys(text1)
-check2 = driver.find_element('id ','area_notes_validate').text
-assert check2 == text1
+from webdriver_manager.chrome import ChromeDriverManager
+from time import sleep
+
+driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+
+driver.get("https://pro.kilid.com/")
+#window_title = driver.title
+#print(window_title)
+sleep(2)
+#driver.refresh()
+#driver.quit()
+driver.switch_to.new_window('window')
+driver.get("https://kilid.com/")
+sleep(2)
+pro_window = driver.current_window_handle
+print('yahoo'+str(pro_window))
+all_handel = driver.window_handles
+print('all_handel'+str(all_handel))
+driver.switch_to.window(all_handel[0])
+
+sleep(3)
+#driver.get("https://kilid.com/")
+#driver.back()
+#sleep(3)
+#driver.forward()
